@@ -1,0 +1,196 @@
+<html>
+<head>
+    <title>Log In and Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    
+
+    <style>
+        body {
+            font-family: 'Outfit';
+        }
+        form {
+            font-family: 'Poppins';
+        }
+        .toggle-container {
+            border-top-right-radius: 30px; /* Bo tròn góc trên bên phải */
+            border-bottom-right-radius: 30px; /* Bo tròn góc dưới bên phải */
+            border-top-left-radius: 0; /* Không bo tròn góc trên bên trái */
+            border-bottom-left-radius: 0; /* Không bo tròn góc dưới bên trái */
+        }
+
+        
+
+    </style>
+
+</head>
+
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+
+    <div class="container bg-white rounded-2xl shadow-2xl flex max-w-6xl w-full">
+        <div class="form-container p-16 flex-1">
+            <h2 class="text-8xl font-bold mb-16">Log In</h2>
+            <form action="#" font-family ="Poppins">
+                <input type="email" placeholder="Email" required class="mb-12 p-8 text-4xl border border-gray-300 rounded-lg w-full">
+                <div class="relative mb-12">
+                    <input type="password" class="password p-8 text-4xl border border-gray-300 rounded-lg w-full" placeholder="Password">
+                    <i class="fas fa-eye eye-icon absolute top-1/2 right-8 transform -translate-y-1/2 text-3xl cursor-pointer"></i>
+                </div>
+                <button type="submit" class="p-8 text-4xl bg-red-600 text-white rounded-lg w-full">Log In</button>
+            </form>
+        </div>
+
+        <div class="toggle-container rounded-tr-2xl rounded-br-2xl bg-red-600 text-white p-16 flex-1 flex flex-col justify-center items-center">
+            <h2 class="text-8xl font-bold mb-16">New Here?</h2>
+            <p class="text-4xl mb-16">Sign up and discover a great amount of new opportunities!</p>
+            <button onclick="toggleForm()" class="p-8 text-4xl bg-white text-red-600 rounded-lg">Register</button>
+        </div>
+    </div>
+
+    <div class="container rounded-2xl bg-white shadow-2xl flex max-w-6xl w-full hidden">
+        <div class="form-container p-16 flex-1">
+            <h2 class="text-8xl font-bold mb-16">Register</h2>
+            <form>
+                <input type="text" placeholder="Username" required class="mb-12 p-8 text-4xl border border-gray-300 rounded-lg w-full">
+                <input type="email" placeholder="Email" required class="mb-12 p-8 text-4xl border border-gray-300 rounded-lg w-full">
+                <div class="relative mb-12">
+                    <input type="password" placeholder="Password" class="password p-8 text-4xl border border-gray-300 rounded-lg w-full">
+                    <i class='fas fa-eye eye-icon absolute top-1/2 right-8 transform -translate-y-1/2 text-3xl cursor-pointer'></i>
+                </div>
+                <button type="submit" class="p-8 text-4xl bg-red-600 text-white rounded-lg w-full">Register</button>
+            </form>
+        </div>
+        <div class="toggle-container bg-red-600 text-white p-16 flex-1 flex flex-col justify-center items-center">
+            <h2 class="text-8xl font-bold mb-16">One of Us?</h2>
+            <p class="text-4xl mb-16">If you already have an account, just log in. We've missed you!</p>
+            <button onclick="toggleForm()" class="p-8 text-4xl bg-white text-red-600 rounded-lg">Log In</button>
+        </div>
+    </div>
+
+    <script>
+        
+        function toggleForm() {
+            const containers = document.querySelectorAll('.container');
+            containers.forEach(container => {
+                container.classList.toggle('hidden');
+            });
+        }
+
+        const pwShowHide = document.querySelectorAll(".eye-icon");
+        pwShowHide.forEach(eyeIcon => {
+            eyeIcon.addEventListener("click", () => {
+                const passwordField = eyeIcon.previousElementSibling;
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                    eyeIcon.classList.replace("fa-eye", "fa-eye-slash");
+                } else {
+                    passwordField.type = "password";
+                    eyeIcon.classList.replace("fa-eye-slash", "fa-eye");
+                }
+            });
+        });
+
+                // Danh sách tài khoản demo
+        // Danh sách tài khoản demo
+        const users = [
+            { email: "user1@example.com", password: "password123" },
+            { email: "user2@example.com", password: "mypassword" }
+        ];
+
+        // Xử lý form
+        document.querySelectorAll('form').forEach((form, index) => {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // Ngăn form gửi đi mặc định
+
+                // Lấy giá trị từ form
+                const email = event.target.querySelector('input[type="email"]').value;
+                const password = event.target.querySelector('input[type="password"]').value;
+
+                if (index === 0) {
+                    // Xử lý đăng nhập
+                    const user = users.find(u => u.email === email && u.password === password);
+                    if (user) {
+                        alert('Login successful!');
+                        window.location.href = "/home/home.html"; // Chuyển hướng đến trang chủ
+                    } else {
+                        alert('Invalid email or password!');
+                    }
+                } else if (index === 1) {
+                    // Xử lý đăng ký
+                    const userExists = users.some(u => u.email === email);
+                    if (userExists) {
+                        alert('This email is already registered!');
+                        return;
+                    }
+                    if (password.length < 6) {
+                        alert('Password must be at least 6 characters long!');
+                        return;
+                    }
+                    // Thêm người dùng mới
+                    users.push({ email, password });
+                    alert('Registration successful!');
+                    window.location.href = "/home/home.html"; // Chuyển hướng đến trang chủ
+                }
+            });
+        });
+
+        // API
+        /* 
+        // Hàm gọi API
+        async function callAPI(url, method, data) {
+            try {
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                return await response.json();
+            } catch (error) {
+                console.error('Error:', error);
+                return { success: false, message: "Server error" };
+            }
+        }
+
+        // Xử lý form
+        document.querySelectorAll('form').forEach((form, index) => {
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault(); // Ngăn form gửi đi mặc định
+
+                // Lấy giá trị từ form
+                const email = event.target.querySelector('input[type="email"]').value;
+                const password = event.target.querySelector('input[type="password"]').value;
+
+                if (index === 0) {
+                    // Xử lý đăng nhập
+                    const result = await callAPI('/api/login', 'POST', { email, password });
+                    if (result.success) {
+                        alert(result.message);
+                        window.location.href = "home.html"; // Chuyển hướng đến trang chủ
+                    } else {
+                        alert(result.message);
+                    }
+                } else if (index === 1) {
+                    // Xử lý đăng ký
+                    const result = await callAPI('/api/register', 'POST', { email, password });
+                    if (result.success) {
+                        alert(result.message);
+                        window.location.href = "home.html"; // Chuyển hướng đến trang chủ
+                    } else {
+                        alert(result.message);
+                    }
+                }
+            });
+        });
+        */
+
+
+
+    </script>
+</body>
+</html>

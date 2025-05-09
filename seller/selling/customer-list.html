@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách khách hàng</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Danh sách khách hàng</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Ngày</th>
+        <th>Họ và tên</th>
+        <th>Số điện thoại</th>
+        <th>Email</th>
+        <th>Giỏ hàng</th>
+        <th>Tổng tiền</th>
+      </tr>
+    </thead>
+    <tbody id="customer-table">
+      <!-- Dữ liệu sẽ được thêm ở đây -->
+    </tbody>
+  </table>
+  
+
+  <script>
+    // Lấy danh sách khách hàng từ localStorage
+    const customerList = JSON.parse(localStorage.getItem("customerList")) || [];
+    const customerTable = document.getElementById("customer-table");
+
+    customerList.forEach(customer => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${customer.date}</td>
+        <td>${customer.name}</td>
+        <td>${customer.phone}</td>
+        <td>${customer.email}</td>
+        <td>
+          <ul>
+            ${customer.cart.map(item => `<li>${item.productName} (x${item.quantity}) - ${item.price.toLocaleString('vi-VN')}₫</li>`).join("")}
+          </ul>
+        </td>
+        <td>${customer.total}</td>
+      `;
+      customerTable.appendChild(row);
+    });
+
+
+  </script>
+</body>
+</html>

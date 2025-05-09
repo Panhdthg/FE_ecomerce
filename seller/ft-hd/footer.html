@@ -1,0 +1,136 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <title>Footer</title>
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Make sure body takes the full viewport height */
+        }
+        .content {
+            flex: 1; /* This makes the content take all available space */
+        }
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 40px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100vw;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .footer div {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            padding: 20px;
+        }
+        .footer h3 {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+        .footer p, .footer a {
+            font-size: 24px;
+            color: #fff;
+            text-decoration: none;
+            margin: 5px 0;
+        }
+        .footer input[type="email"] {
+            padding: 10px;
+            width: calc(100% - 40px);
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .footer button {
+            padding: 10px;
+            border: none;
+            background-color: #fff;
+            color: #000;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .footer .social-icons a {
+            padding: 15px;
+            padding-left: 0;
+            color: #fff;
+            font-size: 30px;
+        }
+        .footer .app-links img {
+            width: 120px;
+            margin: 10px 0;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div class="content">
+        <!-- Your content goes here -->
+    </div>
+
+    <footer class="footer">
+        <div>
+            <h3>Exclusive</h3>
+            <p>Subscribe</p>
+            <p>Get 10% off your first order</p>
+            <input placeholder="Enter your email" type="email"/>
+            <button><i class="fas fa-arrow-right"></i></button>
+        </div>
+    
+        <div>
+            <h3>Support</h3>
+            <p>268 Lý Thường Kiệt, Phường 14,</p><p> Quận 10, Hồ Chí Minh</p>
+            <p>exclusive@gmail.com</p>
+            <p>+8428 3864 7256</p>
+        </div>
+        
+        <div>
+            <h3>Account</h3>
+            <p><a href="#">My Account</a></p>
+            <p><a href="#">Login / Register</a></p>
+            <p><a href="/selling/customer-product.html">Cart</a></p>
+            <p><a href="#">Wishlist</a></p>
+            <p><a href="#">Shop</a></p>
+        </div>
+    
+        <div>
+            <h3>Quick Link</h3>
+            <p><a href="#">Privacy Policy</a></p>
+            <p><a href="#">Terms Of Use</a></p>
+            <p><a href="#">FAQ</a></p>
+            <p><a href="#">Contact</a></p>
+        </div>
+    
+        <div>
+            <h3>Download App</h3>
+            <p>Save 10% with App New User Only</p>
+            <div class="app-links">
+                <img alt="QR code" src="/ft-hd/qr_code.png">
+            </div>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

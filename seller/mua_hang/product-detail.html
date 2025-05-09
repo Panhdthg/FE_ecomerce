@@ -1,0 +1,296 @@
+<html>
+    <head>
+        <title> Sản phẩm </title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com"   
+      crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"   
+      rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"   
+  rel="stylesheet">
+        <style>
+            body {
+              font-family: 'Outfit', sans-serif;
+              margin: 0;
+              padding: 0;
+              background-color: #fff;
+          }
+
+          .container {
+              display: flex;
+              flex-wrap: wrap;
+              padding-top: 100px;
+              padding-bottom: 100px;
+              padding-left: 200px;
+              padding-right: 200px;
+          }
+
+          .image-section,
+          .details-section {
+              flex: 1;
+              
+          }
+
+          .image-section img {
+              width: 800px;
+              height: 800px;
+              align-items: center;
+              
+
+          }
+
+          .details-section h1 {
+              font-size: 36px;
+              margin: 0 0 20px;
+          }
+          .details-section p {
+              font-size: 28px;
+              margin: 0 0 20px;
+          }
+
+          .price-section {
+              display: flex;
+              align-items: center;
+              margin: 20px 0;
+          }
+
+          .price-section .original-price {
+              text-decoration: line-through;
+              color: #999;
+              margin-right: 20px;
+          }
+
+          .price-section .discounted-price {
+              color: #ff4d4f;
+              font-size: 30px;
+              margin-right: 10px;
+          }
+
+          .price-section .discount-percentage {
+              background-color: #ff4d4f;
+              color: #fff;
+              padding: 5px 10px;
+              border-radius: 5px;
+              font-size: 20px;
+          }
+
+          .quantity-section {
+              display: flex;
+              align-items: center;
+              margin: 20px 0;
+          }
+
+          .quantity-section button {
+              background-color: #f0f0f0;
+              border: none;
+              padding: 10px;
+              font-size: 16px;
+              cursor: pointer;
+          }
+
+          .quantity-section input {
+              width: 50px;
+              text-align: center;
+              border: 1px solid #ccc;
+              margin: 0 10px;
+              padding: 10px;
+              font-size: 20px;
+          }
+
+          .add-to-cart {
+              background-color: #000;
+              color: #fff;
+              padding: 15px 20px;
+              border: none;
+              font-size: 28px;
+              cursor: pointer;
+              width: 100%;
+              text-align: center;
+          }
+
+          .info-section {
+              display: flex;
+              justify-content: space-between;
+              background-color: #f9f9f9;
+              padding: 20px;
+              margin: 20px 0;
+          }
+
+          .info-section div {
+              flex: 1;
+              text-align: center;
+          }
+
+          .product-info {
+              margin: 20px 0;
+          }
+
+          .product-info h2 {
+              padding-top:30px;
+              font-size: 27px;
+              margin: 0 0 10px;
+          }
+
+          .product-info ul {
+              list-style: none;
+              padding: 0;
+              margin: 0;
+              font-size: 24px;
+
+          }
+
+          .product-info ul li {
+              margin: 5px 0;
+          }
+
+      </style>
+    </head>
+  <body>
+    <div id="header"></div>
+    <div id="product-detail"></div>
+    <div id="footer"></div>
+
+    <script>
+        function loadHTML(elementId, filePath) {
+            fetch(filePath)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                });
+        }
+        loadHTML('header', '/ft-hd/header.html');
+        loadHTML('footer', '/ft-hd/footer.html');
+        
+        const products = [
+        {
+          id: 1,
+          name: "Túi Xách Đeo Vai Kẹp Nách Đi Học Đi Chơi Thời Trang Nữ Cá Tính - TDC170",
+          description: "Mô Tả Sản Phẩm:Túi Xách Nữ Da Mềm Thời Trang Du Lịch Phong Cách Hàn Quốc - TDC150 ( Phụ kiện sẽ về theo từng đợt lô về khách chú ý giúp shop nha) - Kích thước: szcm - Chất liệu: Da...",
+          brand: "OEM",
+          seller: "Túi Xinh Store 2022",
+          originalPrice: null,
+          discountedPrice: 89000,
+          image: "https://storage.googleapis.com/a1aa/image/kaReZ8GTklQzDildJv2DG1NQkltYtP9jlenQbusDdDlGmq4TA.jpg"
+        },
+        {
+          id: 2,
+          name: "Áo Thun Unisex",
+          description: "Áo thun basic dành cho cả nam và nữ",
+          brand: "Basic Wear",
+          seller: "Shop B",
+          originalPrice: 250000,
+          discountedPrice: 200000,
+          image: "https://via.placeholder.com/800"
+        },
+        {
+          id: 3,
+          name: "Giày Sneaker Thể Thao",
+          description: "Giày sneaker phong cách hiện đại",
+          brand: "Sporty",
+          seller: "Shop C",
+          originalPrice: 800000,
+          discountedPrice: 650000,
+          image: "https://via.placeholder.com/800"
+        },
+        {
+          id: 4,
+          name: "Balo Đi Học",
+          description: "Balo tiện dụng, thời trang dành cho học sinh",
+          brand: "Urban Style",
+          seller: "Shop D",
+          originalPrice: 450000,
+          discountedPrice: 350000,
+          image: "https://via.placeholder.com/800"
+        }
+        ];
+
+      // Hàm lấy giá trị tham số từ URL
+      function getQueryParam(param) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(param);
+      }
+
+      // Lấy `id` từ URL
+      const productId = 1;
+      
+
+      // Tìm sản phẩm theo `id`
+      const product = products.find(p => p.id === productId);
+
+      if (product) {
+        document.getElementById('product-detail').innerHTML = `
+          <div class="container">
+            <div class="image-section">
+              <img src="${product.image}" alt="${product.name}">
+            </div>
+            <div class="details-section">
+              <h1>${product.name}</h1>
+              <p><strong>Thương hiệu:</strong> ${product.brand}</p>
+              <p><strong>Người bán:</strong> ${product.seller}</p>
+              <p>${product.description}</p>
+              <div class="price-section">
+                ${product.originalPrice ? `<span class="original-price">${product.originalPrice.toLocaleString()}₫</span>` : ''}
+                ${product.discountedPrice ? `<span class="discounted-price">${product.discountedPrice.toLocaleString()}₫</span>` : ''}
+              </div>
+              <button class="add-to-cart" onclick="addToCart(${product.id})">Thêm Vào Giỏ</button>
+            </div>
+          </div>
+`;
+
+    } else {
+      document.getElementById('product-detail').innerHTML = '<p>Sản phẩm không tồn tại!</p>';
+    }
+
+      function addToCart(productId) {
+          let cart = JSON.parse(localStorage.getItem('cart')) || [];
+          const existingProduct = cart.find(item => item.id === productId);
+
+          if (existingProduct) {
+              existingProduct.quantity++;
+          } else {
+              cart.push({ id: productId, quantity: 1 });
+          }
+
+          localStorage.setItem('cart', JSON.stringify(cart));
+          alert("Sản phẩm đã được thêm vào giỏ hàng!");
+      }
+
+      function viewCart() {
+          const cart = JSON.parse(localStorage.getItem('cart')) || [];
+          let cartDetails = '';
+          cart.forEach(item => {
+              const product = products.find(p => p.id === item.id);
+              cartDetails += `<p>${product.name} - Số lượng: ${item.quantity}</p>`;
+          });
+
+          if (cartDetails === '') {
+              cartDetails = '<p>Giỏ hàng của bạn trống!</p>';
+          }
+
+          document.getElementById('cart-detail').innerHTML = cartDetails;
+      }
+        
+      function updateCartBadge() {
+          const cart = JSON.parse(localStorage.getItem('cart')) || [];
+          const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+          const cartBadge = document.querySelector('.navbar .badge');
+          if (cartBadge) {
+              cartBadge.textContent = totalItems;
+          }
+      }
+
+      // Cập nhật badge khi tải trang
+      updateCartBadge();
+
+
+
+
+
+        
+
+    </script>
+
+</body>
+</html>

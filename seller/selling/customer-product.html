@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách món hàng đã mua</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .customer-list {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .customer {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+        }
+        .customer:last-child {
+            border-bottom: none;
+        }
+        .customer h2 {
+            font-size: 20px;
+            margin: 0 0 10px;
+        }
+        .customer p {
+            margin: 5px 0;
+        }
+        .order-item {
+            margin-left: 20px;
+        }
+        .order-item p {
+            margin: 2px 0;
+        }
+        .total-spent {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Danh sách món hàng đã mua</h1>
+    <div class="customer-list" id="customer-list"></div>
+    <div id="total-spent" class="total-spent"></div>
+
+    <script>
+        function loadCustomerData() {
+            const customerList = JSON.parse(localStorage.getItem('customerList')) || [];
+            const customerListDiv = document.getElementById('customer-list');
+            const totalSpentDiv = document.getElementById('total-spent');
+            let totalSpent = 0;
+
+            if (customerList.length === 0) {
+                customerListDiv.innerHTML = '<p>Chưa có khách hàng nào đã mua hàng.</p>';
+                return;
+            }
+
+            customerList.forEach((customer, index) => {
+                const customerDiv = document.createElement('div');
+                customerDiv.className = 'customer';
+
+                customerDiv.innerHTML = `
+                    <h2>Khách hàng ${index + 1}: ${customer.name}</h2>
+                    <p><strong>Số điện thoại:</strong> ${customer.phone}</p>
+                    <p><strong>Email:</strong> ${customer.email}</p>
+                    <p><strong>Ngày mua:</strong> ${customer.date}</p>
+                    <h3>Danh sách món hàng:</h3>
+                `;
+
+                customer.cart.forEach(item => {
+                    const orderItemDiv = document.createElement('div');
+                    orderItemDiv.className = 'order-item';
+                    orderItemDiv.innerHTML = `
+                        <p><strong>Sản phẩm:</strong> ${item.productName}</p>
+                        <p><strong>Số lượng:</strong> ${item.quantity}</p>
+                        <p><strong>Giá:</strong> ${item.price.toLocaleString('vi-VN')}₫</p>
+                    `;
+                    customerDiv.appendChild(orderItemDiv);
+                });
+
+                const customerTotal = parseInt(customer.total.replace(/[^0-9]/g, ''));
+                totalSpent += customerTotal;
+
+                customerDiv.innerHTML += `<p><strong>Tổng tiền:</strong> ${customer.total}</p>`;
+                customerListDiv.appendChild(customerDiv);
+            });
+
+            totalSpentDiv.textContent = `Tổng tiền đã chi: ${totalSpent.toLocaleString('vi-VN')}₫`;
+        }
+
+        loadCustomerData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý thông tin người bán</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com"   
+    crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"   
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"   
+ rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            padding-top: 50px;
+            
+        }
+
+        .form-container, .table-container {
+            margin: 20px auto;
+            max-width: 800px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            padding-bottom: 50px;
+        }
+
+        .form-container input, .form-container button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #da4444;
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+
+        .actions button {
+            margin: 0 5px;
+            padding: 5px 10px;
+        }
+
+        .edit-mode {
+            background-color: #fffae6;
+        }
+
+        #image_preview {
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+            object-fit: cover;
+        }
+
+        .price {
+            color: #da4444;
+            font-weight: bold;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 20px;
+        }
+        #customer_list_btn {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #customer_list_btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <h1>Quản lý thông tin người bán</h1>
+
+    <div class="form-container">
+        <h2>Thêm/Sửa thông tin sản phẩm</h2>
+        <input type="text" id="product_name" placeholder="Product Name">
+        <input type="text" id="product_id" placeholder="Product ID">
+        <textarea id="description" placeholder="Mô tả sản phẩm" rows="4"></textarea>
+        <input type="number" id="price" placeholder="Giá bán (Tối thiểu 1000đ)" min="1000">
+        <input type="text" id="brand" placeholder="Tên Brand">
+        <input type="text" id="seller_id" placeholder="Seller ID">
+        <input type="file" id="product_image" accept="image/*" onchange="previewImage(event)">
+        <img id="image_preview" src="" alt="Hình ảnh sản phẩm" style="display:none;">
+        <button onclick="addOrUpdateProduct()">Thêm/Sửa sản phẩm</button>
+    </div>
+
+    <div class="table-container">
+        <h2>Danh sách sản phẩm</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Product ID</th>
+                    <th>Mô tả</th>
+                    <th>Giá bán</th>
+                    <th>Brand</th>
+                    <th>Seller ID</th>
+                    <th>Hình ảnh</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="product_list">
+                <!-- Danh sách sản phẩm sẽ được tạo động -->
+            </tbody>
+        </table>
+    </div>
+    <div id="footer"></div>
+
+    <script>
+    let editIndex = null;
+
+    function addOrUpdateProduct() {
+        const productname = document.getElementById("product_name").value;
+        const productID = document.getElementById("product_id").value;
+        const description = document.getElementById("description").value;
+        let price = document.getElementById("price").value;
+        const brand = document.getElementById("brand").value;
+        const sellerID = document.getElementById("seller_id").value;
+        const image = document.getElementById("image_preview").src;
+
+        if (!productID || !description || !price || !brand || !sellerID) {
+            alert("Vui lòng điền đầy đủ thông tin.");
+            return;
+        }
+
+        // Price validation
+        price = parseInt(price);
+        if (price < 1000) {
+            alert("Giá bán tối thiểu là 1000đ.");
+            return;
+        }
+
+        const productData = {
+            productname,
+            productID,
+            description,
+            price: formatPrice(price),
+            brand,
+            sellerID,
+            image
+        };
+
+        const productList = JSON.parse(localStorage.getItem('productList')) || [];
+
+        if (editIndex !== null) {
+            productList[editIndex] = productData; // Sửa sản phẩm
+            editIndex = null;
+        } else {
+            productList.push(productData); // Thêm sản phẩm mới
+        }
+
+        localStorage.setItem('productList', JSON.stringify(productList)); // Lưu danh sách sản phẩm vào localStorage
+
+        resetForm();
+        loadProductList(); // Cập nhật lại danh sách sản phẩm trong table
+    }
+
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            try {
+                document.getElementById('image_preview').src = reader.result;
+                localStorage.setItem('productImage', reader.result); // Lưu base64 hình ảnh
+            } catch (error) {
+                alert("Có lỗi xảy ra khi tải hình ảnh.");
+            }
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function loadProductList() {
+        const productList = JSON.parse(localStorage.getItem('productList')) || [];
+        const tableBody = document.getElementById("product_list");
+        tableBody.innerHTML = ''; // Clear existing table data
+
+        productList.forEach((product, index) => {
+            const row = tableBody.insertRow();
+            createCells(row, product, index);
+        });
+    }
+
+    function createCells(row, data, index) {
+        const values = [data.productname, data.productID, data.description, data.price, data.brand, data.sellerID];
+        values.forEach(value => {
+            const cell = row.insertCell();
+            cell.innerText = value;
+        });
+
+        const imageCell = row.insertCell();
+        imageCell.innerHTML = `<img src="${data.image}" alt="Hình ảnh sản phẩm" style="width: 100px; height: 100px; object-fit: cover;">`;
+        
+        const actionCell = row.insertCell();
+        actionCell.className = "actions";
+        actionCell.innerHTML = `
+            <button onclick="editProduct(${index})">Sửa</button>
+            <button onclick="deleteProduct(${index})">Xóa</button>
+        `;
+    }
+
+    function editProduct(index) {
+        const productList = JSON.parse(localStorage.getItem('productList')) || [];
+        const product = productList[index];
+
+        document.getElementById("product_name").value = product.productname;
+        document.getElementById("product_id").value = product.productID;
+        document.getElementById("description").value = product.description;
+        document.getElementById("price").value = parseInt(product.price.replace("đ", "").replace(",", ""));  // Format price
+        document.getElementById("brand").value = product.brand;
+        document.getElementById("seller_id").value = product.sellerID;
+        document.getElementById("image_preview").src = product.image;
+
+        editIndex = index; // Set the index of the product being edited
+    }
+
+    function deleteProduct(index) {
+        let productList = JSON.parse(localStorage.getItem('productList')) || [];
+        productList.splice(index, 1);  // Remove the product at index
+        localStorage.setItem('productList', JSON.stringify(productList));  // Save back to localStorage
+        loadProductList();
+    }
+
+    function resetForm() {
+        document.getElementById("product_name").value = "";
+        document.getElementById("product_id").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("price").value = "";
+        document.getElementById("brand").value = "";
+        document.getElementById("seller_id").value = "";
+        document.getElementById("image_preview").src = "";
+        document.getElementById("image_preview").style.display = "none";
+    }
+
+    function formatPrice(price) {
+        let formattedPrice = parseInt(price).toLocaleString('vi-VN');
+        return formattedPrice + "đ";
+    }
+
+    // Load products into the table when the page loads
+    window.onload = function() {
+        loadProductList();
+    };
+
+    function loadHTML(elementId, filePath) {
+        fetch(filePath)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(elementId).innerHTML = data;
+            });
+    }
+    loadHTML('header', '/ft-hd/header.html');
+    loadHTML('footer', '/ft-hd/footer.html');
+    </script>
+</body>
+</html>

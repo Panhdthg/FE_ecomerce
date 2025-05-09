@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách sản phẩm</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 50px;
+    }
+
+    .product-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin: 15px;
+      padding: 15px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .product-card h2 {
+      font-size: 18px;
+      color: #333;
+      margin: 10px 0;
+    }
+
+    .product-card a {
+      display: inline-block;
+      text-decoration: none;
+      background-color: #000;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .product-card a:hover {
+      background-color: #ff4d4f;
+    }
+
+    .filter-container {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .filter-container select {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+      
+    <div id="header"></div>
+
+    <!-- Category Filter -->
+    <div class="filter-container">
+      <label for="category-filter">Chọn danh mục:</label>
+      <select id="category-filter">
+        <option value="all">Tất cả</option>
+        <option value="1-5">Túi xách</option>
+        <option value="6-10">Balo</option>
+        <option value="11-15">Túi tote</option>
+        <option value="16-20">Ví</option>
+        <option value="21-25">Bao da</option>
+        <option value="26-30">Móc khóa</option>
+        <option value="31-35">Mặt hàng khác</option>
+      </select>
+    </div>
+
+    <div class="container" id="product-list"></div>
+    <div id="footer"></div>
+
+    <script>
+        const products = [
+            //Tui xach
+            { id: 1, name: "Túi Xách Đeo Vai Kẹp Nách Đi Học Đi Chơi Thời Trang Nữ Cá Tính - TDC170", image: "/product/sanpham/tuixach/tuixach_img/1.jpeg", category: "Túi xách" },
+            { id: 2, name: "Túi Xách Đeo Vai Túi Cầm Tay Nữ Đi Chơi Dự Tiệc Thời Trang Cao Cấp - TDC521", image: "/product/sanpham/tuixach/tuixach_img/2.webp", category: "Túi xách" },
+            { id: 3, name: "Túi đeo chéo nữ BÒ SỮA đi chơi phong cách Hàn Quốc BS01", image: "/product/sanpham/tuixach/tuixach_img/3.jpg", category: "Túi xách" },
+            { id: 4, name: "Túi xách khoá sập GB Quảng Châu 9928", image: "/product/sanpham/tuixach/tuixach_img/4.jpg.webp", category: "Túi xách" },
+            { id: 5, name: "Túi Xách Nữ Da Mềm Thời Trang Du Lịch Phong Cách Hàn Quốc - TDC150", image: "/product/sanpham/tuixach/tuixach_img/5.png", category: "Túi xách" },
+
+            //Balo
+            { id: 6, name: "Balo Nữ Màu Đen 3 Ngăn Phong Cách Hàn Quốc", image: "/product/sanpham/balo/balo_img/1.jpeg", category: "Balo" },
+            { id: 7, name: "Balo Thời Trang Nữ Caro Xinh Xắn Du Lịch Dự Tiệc Phong Cách Hàn Quốc - BL021", image: "/product/sanpham/balo/balo_img/2.jpeg", category: "Balo" },
+            { id: 8, name: "Balo đeo chéo 1 quai họa tiết thời trang", image: "/product/sanpham/balo/balo_img/3.jpg.webp", category: "Balo" },
+            { id: 9, name: "Balo mini cute đeo 2 dáng phong cách thời trang Hàn Quốc xịn xò chuẩn đẹp ZUCI A53", image: "/product/sanpham/balo/balo_img/4.jpg", category: "Balo" },
+            { id: 10, name: "Cặp học sinh cho bé gái cấp 1 hình công chúa Elsa", image: "/product/sanpham/balo/balo_img/5.jpg.webp", category: "Balo" },
+
+            //tui tote
+            { id: 11, name: "Túi Vải Cói, Vải Đay Vải Bố Túi xách nữ Khóa kéoHọa Tiết Caro Hoa thời trang Lucky Strar Trương Gia 12", image: "/product/sanpham/tui_tote/tuitote_img/1.jpg", category: "Túi tote" },
+            { id: 12, name: "Túi Vải Cói, Vải Đay Vải Bố Túi xách nữ Khóa kéo Họa Tiết Caro Hoa vải lanh thời trang Lucky Strar Trương Gia 13", image: "/product/sanpham/tui_tote/tuitote_img/2.jpg", category: "Túi tote" },
+            { id: 13, name: "Túi Vải Cói, Vải Đay Vải Bố Túi xách nữ Khóa kéo Họa Tiết Caro Hoa vải lanh thời trang Lucky Strar Trương Gia 13", image: "/product/sanpham/tui_tote/tuitote_img/3.jpg", category: "Túi tote" },
+            { id: 14, name: "Túi Cói Hình Gấu Bông Siêu Tiện Dụng TÚI XINH thời trang phong cách Trương Gia 02", image: "/product/sanpham/tui_tote/tuitote_img/4.jpeg", category: "Túi tote" },
+            { id: 15, name: "Túi Xách Cói Mini Họa Tiết Siêu Xinh", image: "/product/sanpham/tui_tote/tuitote_img/5.jpg", category: "Túi tote" },
+
+            //vi
+            { id: 16, name: "Ví nữ ngắn mini cute LUCKY nhỏ gọn bỏ túi cao cấp VN21", image: "/product/sanpham/vi/vi_img/1.jpg", category: "Ví" },
+            { id: 17, name: "Ví Nữ Cầm Tay Da Thành Long TLG 204437-4 (Xám)", image: "/product/sanpham/vi/vi_img/2.jpg", category: "Ví" },
+            { id: 18, name: "Ví dài đựng tiền in hình hoạt hình", image: "/product/sanpham/vi/vi_img/3.jpg", category: "Ví" },
+            { id: 19, name: "Ví 2 NGĂN BTS 5522", image: "/product/sanpham/vi/vi_img/4.jpeg", category: "Ví" },
+            { id: 20, name: "Ví silicon cầm tay hình thú nhỏ xinh", image: "/product/sanpham/vi/vi_img/5.jpg", category: "Ví" },
+
+            //baoda
+            { id: 21, name: "BAO DA ĐEO HỒNG MÀU NÂU CAO CẤP - BAO MÁY 8910 ĐƯỢC LÀM THỦ CÔNG TỈ MỈ BỞI THỢ CHUYÊN NGHIỆP", image: "/product/sanpham/baoda/baoda_img/1.jpg", category: "Bao da" },
+            { id: 22, name: "Bao da treo chìa khóa đa năng có móc cài khuy inox tiện lợi", image: "/product/sanpham/baoda/baoda_img/2.jpg", category: "Bao da" },
+            { id: 23, name: "túi da mềm", image: "/product/sanpham/baoda/baoda_img/3.jpg", category: "Bao da" },
+            { id: 24, name: "túi da quảng châu", image: "/product/sanpham/baoda/baoda_img/4.png", category: "Bao da" },
+            { id: 25, name: "túi da kèm ngựa bông", image: "/product/sanpham/baoda/baoda_img/5.jpg", category: "Bao da" },
+
+            //moc khoa
+            { id: 26, name: "Móc Khóa Dạng Ví Da Bò Thời Trang (Màu nâu bò)", image: "/product/sanpham/mockhoa/mockhoa_img/1.jpg", category: "Móc khóa" },
+            { id: 27, name: "Móc khóa gấu dâu, gấu hồng Losto cao cấp đẹp cute hình thú dễ thương phụ kiện túi xách MK5 - Rockcow", image: "/product/sanpham/mockhoa/mockhoa_img/2.jpeg", category: "Móc khóa" },
+            { id: 28, name: "Móc Khóa Thỏ Béo Cute Trang Trí Túi Xách, Balo, Túi vải", image: "/product/sanpham/mockhoa/mockhoa_img/3.jpeg", category: "Móc khóa" },
+            { id: 29, name: "Móc Khóa Quả Bơ - Móc Khóa Gấu Bông Xinh Xắn,Phụ Kiện treo Balo,Túi Xách Chìa Khóa", image: "/product/sanpham/mockhoa/mockhoa_img/4.jpeg", category: "Móc khóa" },
+            { id: 30, name: "Móc khóa thời trang cao cấp 206591 ️Evoucher️", image: "/product/sanpham/mockhoa/mockhoa_img/5.jpg", category: "Móc khóa" },
+
+            //mat hang khac
+            { id: 31, name: "Kẹp Miệng Túi Bảo Quản Thực Phẩm, Niêm Phong Túi Gia Vị Có Nắp Đậy, Khoá Kín Chống Ẩm Tiện Lợi", image: "/product/sanpham/mat_hang_khac/mat-hang-khac_img/1.jpeg", category: "Mặt hàng khác" },
+            { id: 32, name: "Khẩu trang y tế 4D Mask KF94 thương hiệu Đức Nam {túi 10 cái, màu xanh} - sản xuất theo công nghệ Hàn Quốc", image: "/product/sanpham/mat_hang_khac/mat-hang-khac_img/2.jpg", category: "Mặt hàng khác" },
+            { id: 33, name: "sét 5 cái chân gù thép cao cấp trang trí cho dây đai hay Balo túi xách", image: "/product/sanpham/mat_hang_khac/mat-hang-khac_img/3.jpeg", category: "Mặt hàng khác" },
+            { id: 34, name: "TÚI CHỐNG NƯỚC ĐT", image: "/product/sanpham/mat_hang_khac/mat-hang-khac_img/4.jpeg", category: "Mặt hàng khác" },
+            { id: 35, name: "Khăn Lụa Quấn Cổ, Quấn Túi Sách, Buộc Tay Đa Năng Loại 2", image: "/product/sanpham/mat_hang_khac/mat-hang-khac_img/5.jpeg", category: "Mặt hàng khác" }
+        ];
+
+        const productList = document.getElementById('product-list');
+        const categoryFilter = document.getElementById('category-filter');
+
+        // Function to display products based on selected category
+        function displayProducts(filteredProducts) {
+            productList.innerHTML = filteredProducts.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}">
+                    <h2>${product.name}</h2>
+                    <a href="product-detail.html?id=${product.id}">Xem chi tiết</a>
+                </div>
+            `).join('');
+        }
+
+        // Filter products based on category selection
+        categoryFilter.addEventListener('change', (e) => {
+            const selectedCategory = e.target.value;
+            let filteredProducts = [];
+
+            if (selectedCategory === 'all') {
+                filteredProducts = products;
+            } else {
+                const [start, end] = selectedCategory.split('-').map(Number);
+                filteredProducts = products.filter(product => product.id >= start && product.id <= end);
+            }
+
+            displayProducts(filteredProducts);
+        });
+
+        // Initially display all products
+        displayProducts(products);
+
+        function loadHTML(elementId, filePath) {
+            fetch(filePath)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                });
+        }
+        loadHTML('header', '/ft-hd/header.html');
+        loadHTML('footer', '/ft-hd/footer.html');
+    </script>
+</body>
+</html>

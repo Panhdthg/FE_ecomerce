@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách sản phẩm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com"   
+    crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"   
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"   
+ rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 20px;
+            
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .table-container {
+            margin: 20px auto;
+            max-width: 800px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            margin-bottom: 1000px;
+            
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+
+        .price {
+            color: #ff5722;
+            font-weight: bold;
+        }
+
+        #image_preview {
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+            object-fit: cover;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 20px;
+            padding-bottom: 50px;
+            font-family: 'Outfit';
+        }
+        #customer_list_btn {
+            padding: 10px 20px;
+            background-color: #da4444;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 30px;
+        }
+        #customer_list_btn:hover {
+            background-color: red ;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <h1>Danh sách sản phẩm</h1>
+
+    <div class="table-container">
+        <h2>Danh sách sản phẩm</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Mô tả</th>
+                    <th>Giá bán</th>
+                    <th>Brand</th>
+                    <th>Seller ID</th>
+                    <th>Hình ảnh</th>
+                </tr>
+            </thead>
+            <tbody id="product_list">
+                <!-- Danh sách sản phẩm sẽ được tạo động -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="button-container">
+        <button id="customer_list_btn">Danh sách khách hàng</button>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load header and footer dynamically
+        loadHTML('header', '/ft-hd/header.html');
+        loadHTML('footer', '/ft-hd/footer.html');
+
+        // Load product list from localStorage
+        function loadProductList() {
+            const productList = JSON.parse(localStorage.getItem('productList')) || [];
+            const tableBody = document.getElementById("product_list");
+
+            // Clear the current list
+            tableBody.innerHTML = '';
+
+            // Add each product to the table
+            productList.forEach(product => {
+                const row = tableBody.insertRow();
+                row.innerHTML = `
+                    <td>${product.productID}</td>
+                    <td>${product.description}</td>
+                    <td class="price">${product.price}</td>
+                    <td>${product.brand}</td>
+                    <td>${product.sellerID}</td>
+                    <td><img src="${product.image}" alt="Hình ảnh sản phẩm" style="width: 100px; height: 100px; object-fit: cover;"></td>
+                `;
+            });
+        }
+
+        // Call the loadProductList function when the page is loaded
+        window.onload = loadProductList;
+
+        function loadHTML(elementId, filePath) {
+            fetch(filePath)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                });
+        }
+
+        document.getElementById("customer_list_btn").addEventListener("click", function() {
+            alert("Chuyển đến danh sách khách hàng!"); 
+            window.location.href = 'customer-list.html';
+        });
+
+    </script>
+</body>
+</html>

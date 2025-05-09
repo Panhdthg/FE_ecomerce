@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+
+        .hero {
+            text-align: center;
+            padding: 110px 20px;
+            background: white;
+            height: 1500px;
+        }
+        .hero:hover {
+            background: #da4444;
+            color: white
+        }
+
+        .hero h2 {
+            margin-bottom: 250px;
+            font-size: 300px;
+            color: #da4444;
+            transition: color 0.3s ease-in-out;
+        }
+        .hero h2:hover {
+            color: white;
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .hero button {
+            width: 100%;
+            padding: 10px;
+            background-color: #da4444;
+            width: 600px;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 35px;
+            font-family: 'Poppins';
+        }
+        .hero button:hover {
+            background-color: white;
+        }
+        .hero .start {
+            color: white;
+        }
+        .hero .start:hover {
+            color: #da4444;
+        }
+
+        .features {
+            display: flex;
+            background-color: black;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .feature {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature h3 {
+            margin: 0 0 10px;
+            margin-top: 10px;
+            font-size: 24px;
+        }
+
+        .sliderr {
+            position: relative;
+            padding:0px;
+            margin: 0px;
+            
+        }
+        .slider {
+            position: relative;
+            width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 1s ease-in-out;
+            width: 100%;
+        }
+
+        .slides img {
+            width: 1260px;
+            height: 1260px;
+            object-fit: cover;
+        }
+
+        .slider-buttons {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .slider-buttons button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .slider-buttons button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dots span {
+            display: block;
+            width: 15px;
+            height: 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .dots span.active {
+            background-color: #fff;
+        }
+        
+
+        
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    
+
+    <section class="hero">
+        <h2>Exclusive</h2>
+        <p>Join thousands of happy users enjoying our platform every day.</p>
+        <a href="/product/productne.html"><button><div class="start">Get Started Now</div></button></a>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <h3>FREE AND FAST DELIVERY</h3>
+            <p>Free delivery for all orders over 140.000VNĐ</p>
+        </div>
+        <div class="feature">
+            <h3>24/7 CUSTOMER SERVICE</h3>
+            <p>Friendly 24/7 customer support</p>
+        </div>
+        <div class="feature">
+            <h3>MONEY BACK GUARANTEE</h3>
+            <p>We reurn money within 30 days</p>
+        </div>
+        
+    </section>
+
+    <section class="sliderr">
+        <div class="slider">
+            <div class="slides">
+                <img src="./photos/0.jpg" alt="Slide 0">
+                <img src="./photos/11.jpg" alt="Slide 11">
+                <img src="./photos/12.jpeg" alt="Slide 12">
+                <img src="./photos/1.jpg" alt="Slide 1">
+                <img src="./photos/2.jpg" alt="Slide 2">
+                <img src="./photos/3.jpg" alt="Slide 3">
+                <img src="./photos/4.jpg" alt="Slide 4">
+                <img src="./photos/5.jpg" alt="Slide 5">
+                <img src="./photos/6.jpg" alt="Slide 6">
+                <img src="./photos/7.jpg" alt="Slide 7">
+                <img src="./photos/8.jpg" alt="Slide 8">
+                <img src="./photos/9.jpg" alt="Slide 9">
+                <img src="./photos/10.jpg" alt="Slide 10">
+    
+            </div>
+            <div class="slider-buttons">
+                <button class="prev">&lt;</button>
+                <button class="next">&gt;</button>
+            </div>
+            <div class="dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+                <span class="dot" data-index="3"></span>
+                <span class="dot" data-index="4"></span>
+                <span class="dot" data-index="5"></span>
+            </div>
+            
+    
+        </div>
+    </section>
+
+    
+
+    <div id="footer"></div>
+
+    <script>
+        function loadHTML(elementId, filePath) {
+            fetch(filePath)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                });
+        }
+        loadHTML('header', '/ft-hd/header.html');
+        loadHTML('footer', '/ft-hd/footer.html');        
+
+        const slides = document.querySelector('.slides');
+        const images = document.querySelectorAll('.slides img');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        const dots = document.querySelectorAll('.dot');
+
+        let currentIndex = 0;
+        const totalSlides = images.length;
+
+        // Cập nhật slider
+        function updateSlider(index) {
+        slides.style.transform = `translateX(-${index * 100}%)`; // Mỗi ảnh chiếm 100% chiều rộng
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+        }
+
+        // Hiển thị slide tiếp theo
+        function showNextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        // Check if it's the last slide, then loop back to the first
+        if (currentIndex === totalSlides - 1) {
+            currentIndex = 0; // Reset to first slide
+        }
+        updateSlider(currentIndex);
+        }
+
+        // Hiển thị slide trước đó
+        function showPrevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlider(currentIndex);
+        }
+
+        // Gắn sự kiện cho các nút và chấm
+        nextButton.addEventListener('click', showNextSlide);
+        prevButton.addEventListener('click', showPrevSlide);
+
+        dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            currentIndex = parseInt(dot.dataset.index);
+            updateSlider(currentIndex);
+        });
+        });
+        // Tự động chuyển slide sau mỗi 10 giây
+        setInterval(showNextSlide, 10000);
+    </script>
+</body>
+</html>

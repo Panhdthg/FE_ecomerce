@@ -1,0 +1,172 @@
+<html>
+<head>
+    <title> Header </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com"   
+    crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"   
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"   
+ rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .navbar .logo {
+            font-size: 40px;
+            font-weight: bold;
+            padding-left: 40px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-size: 30px;
+            padding-left: 30px;
+            position: relative; /* Thêm position để pseudo-element hoạt động */
+            line-height: 1;
+        }
+        .navbar .nav-links a:hover {
+            text-decoration: none; /* Remove default underline */
+            color: #000; /* Maintain text color */
+
+            /* Add the underline effect */
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -5px; /* Adjust the position as needed */
+                right: 0;
+                width: 75%;
+                height: 3px; /* Adjust the thickness as needed */
+                background-color: #000;
+            }
+        }
+
+       
+        .navbar .search-container {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            height: 20px;
+            background-color: #f5f5f5;
+        }
+        .navbar .search-container input {
+            font-size: 27px;
+            font-family: 'Poppins';
+            border-radius: 5px;
+            border: none;
+            background-color: #f5f5f5;
+            
+        }
+        .navbar .search-container .hihi {
+            font-size: 25px;
+        }
+        .navbar .icons {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            padding-right: 50px;
+            font-size: 30px;
+        }
+        .navbar .icons .icon {
+            position: relative;
+            cursor: pointer;
+        }
+        .navbar .icons .icon .badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #000;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 5px;
+            font-size: 10px;
+            
+        }
+        .active-link {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        
+        <div class="logo">Exclusive</div>
+        
+        <div class="nav-links">
+            <a href="/home/home.html" class="active-link">Home</a>
+            <a href="/product/productne.html" class="active-link">Product</a>
+            <a href="/selling/product-list.html">Selling</a>
+            <a href="#">About Us</a>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" placeholder="What are you looking for?">
+            <div class = "hihi"><i class="fas fa-search"></i></div>
+        </div>
+        
+        <div class="icons">
+            
+            <div class="icon">
+                <a href="/ft-hd/gio-hang.html"><i class="fas fa-shopping-cart"></i></a>
+                <span class="badge" id="cart-badge">0</span>
+            </div>
+            
+            <div class="icon">
+                <a href="/selling/product-list-display.html"><i class="fas fa-user"></i></a>
+            </div>
+        
+        </div>
+    
+    </div>
+
+    <script>
+        const links = document.querySelectorAll('.active-link');
+    
+        links.forEach(link => {
+          link.addEventListener('click', () => {
+            links.forEach(link => link.classList.remove('active-link'));
+            link.classList.add('active-link');
+          });
+        });
+
+        let cart = []; // Array to store cart items
+
+        function updateCartBadge() {
+            const cartBadge = document.getElementById('cart-badge');
+            cartBadge.textContent = cart.length; // Update cart count
+        }
+
+        function addToCart(product) {
+            cart.push(product); // Add the product to the cart array
+            updateCartBadge(); // Update the cart badge
+        }
+
+        function viewCart() {
+            alert('Viewing cart with ' + cart.length + ' items.');
+            // Here, you can redirect to a cart page or display the cart content dynamically
+        }
+        
+        document.querySelector('.add-to-cart').addEventListener('click', () => {
+            addToCart(product);
+        });
+
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com"   
+    crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"   
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"   
+ rel="stylesheet">
+    <title>Landing Page</title>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-left: 300px;
+            padding-right: 200px;
+            padding-top:10px;
+            padding-bottom: 200px;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: bold;
+            padding-left: 50px;
+            text-align:left;
+            text-transform: uppercase;
+            padding-top: 100px;
+            padding-bottom: 20px;
+            padding-left: 100px;
+        }
+        .product {
+            text-align: center;
+            margin: 20px;
+            flex: 1 1 200px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .product img {
+            padding-top: 50px;
+            width:400px;
+            height: 400px;
+        }
+        .product-title {
+            font-size: 34px;
+            margin: 10px 0;
+            padding-top: 10px;
+            font-weight: 510;
+        }
+        .product-title:hover {
+            text-decoration: underline;
+        }
+        .product-price {
+            color: grey;
+            font-size: 25px;
+            max-width: 200px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="title">Mặt hàng</div>
+    <div class="container">
+    
+        <a href="/product/sanpham/tuixach/tui_xach.html" class="product">
+            <img src ="./product_img/tuixach.jpeg"/>
+            <div class="product-title">
+                Túi xách 
+            </div>
+            
+            <div>
+                <span class="product-price">Túi xách là mặt hàng 'hot' tại Exclusive</span>
+            </div>
+        </a>
+
+        <a href="/product/sanpham/balo/balo.html" class="product">
+            
+            <img src ="./product_img/balo.jpg"/>
+            
+            <div class="product-title">
+                Balo
+            </div>
+            
+            <div>
+                <span class="product-price">Balo chống thấm và chống sốc tốt</span>
+            </div>
+        </a>
+
+        <a href="/product/sanpham/tui_tote/tui_tote.html" class="product">
+            <img src ="./product_img/tui_tote.jpg"/>
+            <div class="product-title">
+                Túi tote
+            </div>
+            
+            <div>
+                <span class="product-price">Túi tote cute cùng các hoạ tiết thú vị</span>
+            </div>
+        </a>
+
+        <a href="/product/sanpham/vi/vi.html" class="product">
+            
+            <img src ="./product_img/vi.jpg"/>
+            
+            <div class="product-title">
+                Ví
+            </div>
+            
+            <div>
+                <span class="product-price">Ví xinh iu đợi bạn rinh về</span>
+            </div>
+        </a>
+
+        <a href="/product/sanpham/baoda/bao_da.html" class="product">
+            <img src ="./product_img/baoda.webp"/>
+            <div class="product-title">
+                Bao da
+            </div>
+            
+            <div>
+                <span class="product-price">Bao da dày dặn, bền bỉ theo<br> thời gian</span>
+            </div>
+        </a>
+
+        <a href="/product/sanpham/mockhoa/moc_khoa.html" class="product">
+            <img src ="./product_img/moc_khoa.jpeg"/>
+            <div class="product-title">
+                Móc khóa
+            </div>
+            
+            <div>
+                <span class="product-price">Móc khóa đa dạng trang trí đồ dùng</span>
+            </div>
+        </a>
+
+        <a href="/product/sanpham/mat_hang_khac/mat_hang_khac.html" class="product">
+            <img src ="./product_img/khac.jpeg"/>
+            <div class="product-title">
+                Mặt hàng khác
+            </div>
+            
+            <div>
+                <span class="product-price">Các mặt hàng khác cũng không kém cạnh</span>
+            </div>
+        </a>
+
+        <a href="/mua_hang/product.html" class="product">
+            <img src ="/product/product_img/tatca.jpeg"/>
+            <div class="product-title">
+                Tất cả các món hàng
+            </div>
+            
+            <div>
+                <span class="product-price">Xem tất cả món hàng tại đây!</span>
+            </div>
+        </a>
+        
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        function loadHTML(elementId, filePath) {
+            fetch(filePath)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                });
+        }
+        loadHTML('header', '/ft-hd/header.html');
+        loadHTML('footer', '/ft-hd/footer.html');        
+
+        
+    </script>
+</body>
+</html>

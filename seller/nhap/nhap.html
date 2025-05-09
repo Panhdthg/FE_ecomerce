@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mua hàng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+        .product {
+            
+            
+            width: 300px;
+            padding: 15px;
+            text-align: center;
+            
+        }
+        .product img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .product h3 {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+        .product p {
+            font-size: 14px;
+            color: #555;
+        }
+        .product .price {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #da4444;
+        }
+        .product .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+        }
+        .add-to-cart {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <div class="product-list" id="productList"></div>    
+    
+    <div id="footer"></div>
+
+    <script>
+        function loadHTML(elementId, filePath) {
+            fetch(filePath)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                });
+        }
+        loadHTML('header', '/ft-hd/header.html');
+        loadHTML('footer', '/ft-hd/footer.html');
+    
+        const products = [
+            {
+                name: "Sản phẩm A",
+                originalPrice: 200000,
+                discountedPrice: 150000,
+                image: "https://via.placeholder.com/300",
+                description: "Mô tả sản phẩm A."
+            },
+            {
+                name: "Sản phẩm B",
+                originalPrice: 300000,
+                discountedPrice: 250000,
+                image: "https://via.placeholder.com/300",
+                description: "Mô tả sản phẩm B."
+            },
+            // Thêm các sản phẩm khác ở đây
+        ];
+    
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get('product'); // Lấy tên sản phẩm từ URL
+    
+        const product = products.find(p => p.name.toLowerCase().replace(/\s+/g, '-') === productName.toLowerCase()); // Tìm sản phẩm theo tên
+    
+        if (product) {
+            const productDetail = document.getElementById('productDetail');
+            productDetail.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <p class="price">
+                    <span class="original-price">${product.originalPrice.toLocaleString()}₫</span>
+                    ${product.discountedPrice.toLocaleString()}₫
+                </p>
+                <button class="add-to-cart">Thêm vào giỏ hàng</button>
+            `;
+        } else {
+            document.getElementById('productDetail').innerHTML = '<p>Sản phẩm không tồn tại.</p>';
+        }
+    
+        document.addEventListener('click', event => {
+            if (event.target.classList.contains('add-to-cart')) {
+                const productName = document.querySelector('.product-detail h3').textContent;
+                alert(`Đã thêm ${productName} vào giỏ hàng!`);
+            }
+        });
+    </script>
+    
+</body>

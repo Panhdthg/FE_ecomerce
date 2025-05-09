@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com"   
+    crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"   
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"   
+ rel="stylesheet">
+    <title>Ví</title>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-left: 300px;
+            padding-right: 200px;
+            padding-top:10px;
+            padding-bottom: 200px;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: bold;
+            padding-left: 50px;
+            text-align:left;
+            text-transform: uppercase;
+            padding-top: 100px;
+            padding-bottom: 20px;
+            padding-left: 100px;
+        }
+        .product {
+            text-align: center;
+            margin: 20px;
+            flex: 1 1 200px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .product img {
+            padding-top: 50px;
+            width:400px;
+            height: 400px;
+        }
+        .product-title {
+            font-size: 34px;
+            margin: 10px 0;
+            padding-top: 10px;
+        }
+        .product-title:hover {
+            text-decoration: underline;
+        }
+        .product-price {
+            color: #da4444;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .product-old-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 24px;
+            margin-left: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="title">Ví</div>
+    <div class="container">
+    
+        <a href="#" class="product">
+            <img src ="./vi_img/1.jpg"/>
+            <div class="product-title">
+                Ví nữ ngắn mini cute LUCKY nhỏ gọn bỏ túi cao cấp VN21
+            </div>
+            
+            <div>
+                <span class="product-price">105,000₫</span>
+            </div>
+        </a>
+
+        <a href="#" class="product">
+            <img src ="./vi_img/2.jpg"/>
+            <div class="product-title">
+                Ví Nữ Cầm Tay Da Thành Long TLG 204437-4 (Xám)
+            </div>
+            
+            <div>
+                <span class="product-price">38,280₫</span>
+            </div>
+        </a>
+       
+        <a href="#" class="product">
+            <img src ="./vi_img/3.jpg"/>
+            <div class="product-title">
+                Ví dài đựng tiền in hình hoạt hình
+            </div>
+            
+            <div>
+                <span class="product-price">35,000₫</span>
+            </div>
+        </a>
+
+        <a href="#" class="product">
+            <img src ="./vi_img/4.jpeg"/>
+            <div class="product-title">
+                Ví 2 NGĂN BTS 5522
+            </div>
+            
+            <div>
+                <span class="product-price">25,000₫</span>
+            </div>
+        </a>
+
+        <a href="#" class="product">
+            <img src ="./vi_img/5.jpg"/>
+            <div class="product-title">
+                Ví silicon cầm tay hình thú nhỏ xinh
+            </div>
+            
+            <div>
+                <span class="product-price">19,000₫</span>
+            </div>
+        </a>
+
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        function loadHTML(elementId, filePath) {
+            fetch(filePath)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                });
+        }
+        loadHTML('header', '/ft-hd/header.html');
+        loadHTML('footer', '/ft-hd/footer.html');        
+
+        
+    </script>
+</body>
+</html>
